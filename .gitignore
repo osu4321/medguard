@@ -1,0 +1,8 @@
+env
+venv
+*.pyc
+__pycache__
+*.DS_Store
+
+## usually would have this commented, but we're keeping it for our project :)
+#project/_config.py
