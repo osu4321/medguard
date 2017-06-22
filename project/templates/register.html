@@ -1,0 +1,91 @@
+{% include "shared/header.html" %}
+
+<!-- BEGIN LOGIN SECTION -->
+<section class="section-account">
+  <div class="img-backdrop" style="background-image: url('{{ url_for('static', filename='img/bg/medguard_login.jpg') }}')"></div>
+  <div class="spacer"></div>
+  <div class="card contain-sm style-transparent">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <br/>
+                <span class="text-lg text-bold text-primary">Create an Account with MEDGuard</span>
+                <br/><br/>
+
+                {% for message in get_flashed_messages() %}
+                    <div class="flash">{{ message }} </div>
+                {% endfor %}
+
+                <form action="" method="post">
+
+                    {{ form.csrf_token }}
+
+                    <h3>Personal Information</h3>
+
+                    <div class="form-group">
+                        {{ form.first_name(class_="form-control") }}
+                        {{ form.first_name.label }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.last_name(class_="form-control") }}
+                        {{ form.last_name.label }}
+                    </div>
+
+                    <div class="form-group ">
+                        {{ form.sex.label(class_="checkbox checkbox-inline checkbox-styled") }}
+                        {{ form.sex }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.dob(class_="form-control") }}
+                        {{ form.dob.label }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.phone_num(class_="form-control") }}
+                        {{ form.phone_num.label }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.email(class_="form-control") }}
+                        {{ form.email.label }}
+                    </div>
+
+                    <h3>Account Information</h3>
+
+                    <div class="form-group">
+                        {{ form.username(class_="form-control") }}
+                        {{ form.username.label }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.password(class_="form-control") }}
+                        {{ form.password.label }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.confirm(class_="form-control") }}
+                        {{ form.confirm.label }}
+                    </div>
+
+                    <div class="row">
+                      <div class="col-xs-6 text-left">
+                        <div class="">
+                          
+                        </div>
+                      </div><!--end .col -->
+                      <div class="col-xs-6 text-right">
+                        <button class="btn btn-primary btn-raised" type="submit">Register</button>
+                      </div><!--end .col -->
+                    </div><!--end .row -->
+                  </form>
+
+        </div><!--end .col -->
+      </div><!--end .row -->
+    </div><!--end .card-body -->
+  </div><!--end .card -->
+</section>
+<!-- END LOGIN SECTION -->
+
+{% include "shared/footer.html" %}

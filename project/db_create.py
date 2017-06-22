@@ -1,21 +1,20 @@
 # create database
 
-import sqlite3
-from _config import DATABASE_PATH
 
-with sqlite3.connect(DATABASE_PATH) as conn:
+from views import db
+from datetime import date
+from models import Users
+from datetime import date
 
-	# cursor
-	c = conn.cursor()
+# Create database and db table
+db.create_all()
 
-	# Create table
-	c.execute("""CREATE TABLE tasks(task_id INTEGER PRIMARY KEY AUTOINCREMENT,
-		name TEXT NOT NULL, due_date TEXT NOT NULL, priority INTEGER NOT NULL,
-		status INTEGER NOT NULL)""")
+'''
+Insert some preliminary data
+'''
 
-	# insert dummy data into table
+# Super User: superadmin/12345
+db.session.add(Users("Smith", "John", "M", date(1970, 1, 1), "superadmin", "12345", "ellis.729@osu.edu", "1234567890"))
+db.session.commit()
 
-	c.execute('INSERT	INTO tasks	(name,	due_date,	priority,	status)'
-			'VALUES("Finish	this	tutorial",	"03/25/2015",	10,	1)')
-	c.execute('INSERT	INTO	tasks	(name,	due_date,	priority,	status)'
-			'VALUES("Finish	Real	Python	Course	2",	"03/25/2015",	10,	1)')
+# Roles

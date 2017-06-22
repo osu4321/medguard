@@ -1,19 +1,88 @@
-{%	extends	"_base.html" %}
-{%	block content %}
-<h3>Please login to access your task list.</h3>
-<form action="/" method="post">
-		<div class="input-group">
-			<label	for="name">Username:</label>
-			<input	type="text"	id="username"	name="username"	value="{{ request.form.username	}}">
-		</div>
-		<div	class="input-group">
-				<label	for="mail">Password:</label>
-				<input	type="password"	id="password"	name="password"	value="{{
-						request.form.password	}}"/>
-		</div>
-		<div>
-				<button	type="submit">Login</button>
-		</div>
-</form>
-<p><em>Use	'admin'	for	the	username	and	password.</em></p>
-{%	endblock	%}
+{% include "shared/header.html" %}
+
+<!-- BEGIN LOGIN SECTION -->
+<section class="section-account">
+
+	<div class="img-backdrop" style="background-image: url('{{ url_for('static', filename='img/bg/medguard_login.jpg') }}')"></div>
+
+	<div class="spacer"></div>
+
+	<div class="card contain-sm style">
+
+		<div class="card-body">
+
+			<div class="row">
+
+				<div class="col-sm-6">
+
+					{% for message in get_flashed_messages() %}
+						<div class="flash">{{ message }} </div>
+					{% endfor %}
+
+					{% if error %}
+						<div class="error"><strong>Error:</strong> {{ error }}</div>
+					{% endif %}
+
+					<br/>
+					<span class="text-lg text-bold text-primary">MEDGuard</span>
+					<br/><br/>
+
+					<form action="/" method="POST">
+
+						<div class="form-group">
+						{{ form.username(class_="form-control") }}
+                        {{ form.username.label }}
+							<!--
+							<input type="text" class="form-control" id="username" name="username" value="{{ request.form.username }}">
+							<label for="username">Username</label>
+							-->
+						</div>
+
+						<div class="form-group">
+						{{ form.password(class_="form-control") }}
+                        {{ form.password.label }}
+							<!-- <input type="password" class="form-control" id="password" name="password" value="{{ request.form.password }}">
+							<label for="password">Password</label> -->
+							<!--<p class="help-block"><a href="#">Forgotten?</a></p>-->
+						</div>
+
+						<br/>
+
+						<div class="row">
+
+							<div class="col-xs-6 text-left">
+								<div class="checkbox checkbox-inline checkbox-styled">
+									<label>
+										<input type="checkbox"> <span>Remember me</span>
+									</label>
+								</div>
+							</div><!--end .col -->
+
+							<div class="col-xs-6 text-right">
+								<button class="btn btn-primary btn-raised" type="submit">Login</button>
+							</div><!--end .col -->
+
+						</div><!--end .row -->
+
+					</form>
+
+				</div><!--end .col -->
+
+				<div class="col-sm-5 col-sm-offset-1 text-center">
+
+					<br><br>
+					<h3 class="text-light">No account yet?</h3>
+					<a class="btn btn-block btn-raised btn-primary" href="/register/">Sign up for MEDGuard</a>						
+							
+				</div><!--end .col -->
+
+			</div><!--end .row -->
+
+		</div><!--end .card-body -->
+
+	</div><!--end .card -->
+
+</section>
+<!-- END LOGIN SECTION -->
+
+{% include "shared/footer.html" %}

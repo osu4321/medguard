@@ -1,12 +1,13 @@
+#####
 # Views
+#####
+
+from forms import AddTaskForm, RegisterForm, LoginForm
 
 from functools import wraps
-
 from flask import Flask, flash, redirect, render_template, request, session, url_for, g
-
-from forms import AddTaskForm
-
 from flask_sqlalchemy import SQLAlchemy
+from nav import render_nav
 
 
 # Config
@@ -32,7 +33,88 @@ def login_required(test):
 	return wrap
 
 
-# route handlers
+##########
+# Route handlers
+##########
+
+'''
+Register
+'''
+
+@app.route('/register/', methods=['GET', 'POST'])
+def register():
+
+	error = None
+	form = RegisterForm(request.form)
+
+	if request.method == 'POST':
+
+		if form.validate_on_submit():
+			
+			# form new user
+			new_user = Users(
+				form.last_name.data,
+				form.first_name.data,
+				form.sex.data,
+				form.dob.data,
+				form.username.data,
+				form.password.data,
+				form.email.data,
+				form.phone_num.data
+			)
+
+			# add new user to db
+			db.session.add(new_user)
+
+			# commit db
+			db.session.commit()
+
+			# message to user
+			flash('Thanks for registering.  You may now login!')
+			
+			return redirect(url_for('login'))
+
+		else :
+			flash('Error in validation')
+
+
+	# Wasn't post method, so show register template
+	return render_template('register.html', form=form, error=error)
+
+'''
+Login
+'''
+@app.route('/', methods=['GET', 'POST'])
+def login():
+
+	error = None
+	form = LoginForm(request.form)
+
+	if request.method == 'POST':
+
+		# TODO bug, never validates!
+		#if form.validate_on_submit():
+
+			user = Users.query.filter_by(username=request.form['username']).first()
+
+			if user is not None and user.password == request.form['password']:
+
+				session['logged_in'] = True
+				session['user_id']	=user.id
+				flash('Welcome to MEDGuard!')
+			
+				return redirect(url_for('view_user_dashboard'))
+
+			else:
+
+				error = "Invalid username or password."
+
+		#else:
+
+			#error = "All fields are required."
+
+	return render_template('login.html', form=form, error=error)
+
 
 '''
 Logout
@@ -43,22 +125,8 @@ def logout():
 	flash('Goodbye!')
 	return redirect(url_for('login'))
 
-'''
-login
-'''
-@app.route('/', methods=['GET', 'POST'])
-def login():
-	error = None
-	if request.method == 'POST':
-		if request.form['username'] != app.config['USERNAME'] \
-			or request.form['password'] != app.config['PASSWORD']:
-			error = 'Invalid Credentials. Please try again.'
-			return render_template('login.html', error=error)
-		else:
-			session['logged_in'] = True
-			flash("Welcome!")
-			return redirect(url_for('view_user_dashboard'))
-	return render_template('login.html')
+
+
 
 
 
@@ -70,6 +138,7 @@ View: User Dashboard
 @login_required
 def view_user_dashboard():
 
+	return render_template('dashboard.html')
 
 
 ####

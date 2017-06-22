@@ -4,10 +4,9 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 DATABASE = 'medguard1.db'
-USERNAME = 'admin'
-PASSWORD = 'admin'
-WTF_CSRF_ENABLED = 'TRUE'
-SECRET_KEY = 'my_precious'
+WTF_CSRF_ENABLED = True
+WTF_CSRF_SECRET_KEY = 'heyoooooo'
+SECRET_KEY = 'coolmancool'
 
 # DATABASE
 DATABASE_PATH = os.path.join(basedir, DATABASE)
