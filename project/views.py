@@ -97,10 +97,11 @@ def login():
 
 			user = Users.query.filter_by(username=request.form['username']).first()
 
+			# If user exists and password matches
 			if user is not None and user.password == request.form['password']:
 
 				session['logged_in'] = True
-				session['user_id']	=user.id
+				session['user_id'] = user.user_id
 				flash('Welcome to MEDGuard!')
 			
 				return redirect(url_for('view_user_dashboard'))
@@ -138,7 +139,7 @@ View: User Dashboard
 @login_required
 def view_user_dashboard():
 
-	return render_template('dashboard.html')
+	return render_template('dashboard.html', testvar="hello")
 
 
 ####
