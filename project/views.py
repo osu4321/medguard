@@ -8,11 +8,11 @@ from flask import Flask, flash, redirect, render_template, request, session, url
 from flask_sqlalchemy import SQLAlchemy
 
 
-
 # Config
 app = Flask(__name__)
 app.config.from_object('_config')
 db = SQLAlchemy(app)
+
 
 from models import Users
 from nav import render_nav
@@ -23,13 +23,16 @@ from nav import render_nav
 Login required decorator
 '''
 def login_required(test):
+
 	@wraps(test)
 	def wrap(*args, **kwargs):
+
 		if 'logged_in' in session:
 			return test(*args, **kwargs)
 		else:
 			flash('You need to login first')
 			return redirect(url_for('login'))
+
 	return wrap
 
 
@@ -74,11 +77,13 @@ def register():
 			return redirect(url_for('login'))
 
 		else :
+
 			flash('Error in validation')
 
 
 	# Wasn't post method, so show register template
 	return render_template('register.html', form=form, error=error)
+
 
 '''
 Login
@@ -121,13 +126,11 @@ Logout
 '''
 @app.route('/logout')
 def logout():
+
 	session.pop('logged_in', None)
 	flash('Goodbye!')
+
 	return redirect(url_for('login'))
-
-
-
-
 
 
 '''
@@ -137,7 +140,7 @@ View: User Dashboard
 @login_required
 def view_user_dashboard():
 
-	return render_template('dashboard.html', main_nav=render_nav('main'))
+	return render_template('dashboard.html', main_nav = render_nav('main'))
 
 
 '''
@@ -148,20 +151,22 @@ View: View Patients
 def view_patients():
 
 	data = Users.query.order_by(Users.user_id)
-
-	return render_template('patients.html', main_nav=render_nav('main'), page_title="Patients", data=data)
+	
+	return render_template('patients.html', main_nav = render_nav('main'), data=data, page_title='Patients')
 
 
 '''
 View: View Appointments
+TODO actually get appointments
 '''
 @app.route('/appointments/')
 @login_required
 def view_appointments():
 
 	data = Users.query.order_by(Users.user_id)
+	page_title = "Appointments"
 
-	return render_template('appointments.html', main_nav=render_nav('main'), page_title="Appointments", data=data)
+	return render_template('appointments.html', main_nav = render_nav('main'), data = data, page_title = page_title)
 
 
 

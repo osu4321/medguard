@@ -3,6 +3,7 @@
 ##########
 
 from flask import session, url_for
+from views_pages import PAGE_ACCESS
 from controller import get_user_role
 
 
@@ -13,6 +14,10 @@ def render_nav(location):
 
 	if location == "main":
 		return render_nav_main()
+
+	#elif location == 'topbar':
+	#	return ''
+
 
 
 '''
@@ -26,13 +31,8 @@ def render_nav_main():
 	role = get_user_role(user_id)
 
 	# Add links to list based on role
-	if role == 1:
-
-		links.append(mg_get_link('patients'))
-		links.append(mg_get_link('appointments'))
-
-	# TODO expand on other roles
-	#if role == '2':
+	for page in PAGE_ACCESS[role]:
+		links.append(mg_get_link(page))
 
 	return links
 
