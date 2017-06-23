@@ -1,13 +1,12 @@
-#####
+###########
 # Views
-#####
+##########
 
 from forms import AddTaskForm, RegisterForm, LoginForm
-
 from functools import wraps
 from flask import Flask, flash, redirect, render_template, request, session, url_for, g
 from flask_sqlalchemy import SQLAlchemy
-from nav import render_nav
+
 
 
 # Config
@@ -16,6 +15,7 @@ app.config.from_object('_config')
 db = SQLAlchemy(app)
 
 from models import Users
+from nav import render_nav
 
 # Helper functions
 
@@ -40,7 +40,6 @@ def login_required(test):
 '''
 Register
 '''
-
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
 
@@ -134,12 +133,37 @@ def logout():
 '''
 View: User Dashboard
 '''
-
 @app.route('/dashboard/')
 @login_required
 def view_user_dashboard():
 
-	return render_template('dashboard.html', testvar="hello")
+	return render_template('dashboard.html', main_nav=render_nav('main'))
+
+
+'''
+View: View Patients
+'''
+@app.route('/patients/')
+@login_required
+def view_patients():
+
+	data = Users.query.order_by(Users.user_id)
+
+	return render_template('patients.html', main_nav=render_nav('main'), page_title="Patients", data=data)
+
+
+'''
+View: View Appointments
+'''
+@app.route('/appointments/')
+@login_required
+def view_appointments():
+
+	data = Users.query.order_by(Users.user_id)
+
+	return render_template('appointments.html', main_nav=render_nav('main'), page_title="Appointments", data=data)
+
+
 
 
 ####
@@ -165,14 +189,18 @@ Add new tasks
 @app.route('/add/', methods = ['POST'])
 @login_required
 def new_task():
+
 	form = AddTaskForm(request.form)
+
 	if request.method == 'POST':
+
 		if form.validate_on_submit():
 
 			new_task = Task(form.name.data, form.due_date.data, form.priority.data, '1')
 			db.session.add(new_task)
 			db.session.commit()
 			flash("New entry successfully added.")
+
 	return redirect(url_for('tasks'))
 
 
