@@ -156,6 +156,19 @@ def view_patients():
 
 
 '''
+View: View Single Patient
+'''
+@app.route('/patients/<user_id>')
+@login_required
+def view_single_patient(user_id):
+
+	data = Users.query.order_by(Users.user_id)
+	
+	return render_template('patients-single.html', main_nav = render_nav('main'), data=data, page_title='Patients')
+
+
+
+'''
 View: View Appointments
 TODO actually get appointments
 '''
@@ -167,6 +180,22 @@ def view_appointments():
 	page_title = "Appointments"
 
 	return render_template('appointments.html', main_nav = render_nav('main'), data = data, page_title = page_title)
+
+
+'''
+View: View Library
+TODO actually get library info
+'''
+@app.route('/library/')
+@login_required
+def view_library():
+
+	# TODO change to library info
+	data = Users.query.order_by(Users.user_id)
+	page_title = "Library"
+
+	return render_template('appointments.html', main_nav = render_nav('main'), data = data, page_title = page_title)
+
 
 
 

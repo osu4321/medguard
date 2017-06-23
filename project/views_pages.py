@@ -8,9 +8,12 @@ from flask import session, url_for
 Define which pages each role can access
 '''
 PAGE_ACCESS = {
+
 	1 : [
+		'library',
 		'patients',
 		'appointments'
+		
 	],
 
 	2: [],

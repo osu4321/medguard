@@ -54,12 +54,18 @@ def mg_get_link(link):
 	elif link == 'library':
 
 		# TODO finish library link
-		ret_vals['url'] = url_for('view_appointments')
-		ret_vals['name'] = 'Appointments'
-		ret_vals['icon'] = 'calendar'
+		ret_vals['url'] = url_for('view_library')
+		ret_vals['name'] = 'Library'
+		ret_vals['icon'] = 'my-library-books'
 		
 
 	elif link == 'appointments':
+
+		ret_vals['url'] = url_for('view_appointments')
+		ret_vals['name'] = 'Appointments'
+		ret_vals['icon'] = 'event'
+
+	elif link == 'patient_data':
 
 		ret_vals['url'] = url_for('view_appointments')
 		ret_vals['name'] = 'Appointments'

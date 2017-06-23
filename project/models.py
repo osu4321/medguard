@@ -77,5 +77,5 @@ class Roles(db.Model):
 		return '<Role {0}>'.format(self.name)
 
 '''
-Patients
+Patient Data
 '''
