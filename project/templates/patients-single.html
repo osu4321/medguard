@@ -19,7 +19,7 @@
 
 		<article class="margin-bottom-xxl">
 			<p>
-				Below is information for all patients currently in the MACGguard database.
+				Below is information for {{ data.first_name }} {{ data.last_name }} currently in the MACGguard database.
 			</p>
 		</article>
 
@@ -41,25 +41,21 @@
 								<th>Sex</th>
 								<th>Email</th>
 								<th>Phone</th>
-								<th></th>
 							</tr>
 						</thead>
 
 						<!-- Table data -->
 						<tbody>
 
-							{% for user in data %}
 								<tr>
-									<td>{{ user.user_id }}</td>
-									<td>{{ user.first_name }}</td>
-									<td>{{ user.last_name }}</td>
-									<td>{{ user.dob }}</td>
-									<td>{{ user.sex }}</td>
-									<td>{{ user.email }}</td>
-									<td>{{ user.phone_num }}</td>
-									<td><a href="{{ url_for('view_single_patient', user_id=user.user_id ) }}">View</a></td>
+									<td>{{ data.user_id }}</td>
+									<td>{{ data.first_name }}</td>
+									<td>{{ data.last_name }}</td>
+									<td>{{ data.dob }}</td>
+									<td>{{ data.sex }}</td>
+									<td>{{ data.email }}</td>
+									<td>{{ data.phone_num }}</td>
 								</tr>
-							{% endfor %}
 							
 						</tbody>
 					</table>
@@ -70,5 +66,62 @@
 </div><!--end .row -->
 <!-- END RESPONSIVE TABLE 1 -->
 
+
+<!-- APPOINTMENT INFO -->
+<div class="row">
+
+	<div class="col-lg-12">
+		<h4>Appointments</h4>
+	</div><!--end .col -->
+
+	<div class="col-md-8">
+
+		<article class="margin-bottom-xxl">
+			<p>
+				Below are all appointments for {{ data.first_name }} {{ data.last_name }} currently in the MACGguard database.
+			</p>
+		</article>
+
+	</div><!--end .col -->
+
+	<div class="col-lg-12">
+		<div class="card">
+			<div class="card-body no-padding">
+				<div class="table-responsive no-margin">
+					<table class="table table-striped no-margin">
+
+						<!-- Table head -->
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Date</th>
+								<th>Time</th>
+								<th>Date of Birth</th>
+								<th>Sex</th>
+								<th>Email</th>
+								<th>Phone</th>
+								<th></th>
+							</tr>
+						</thead>
+
+						<!-- Table data -->
+						<tbody>
+
+							{% for appt in data.appt %}
+								<tr>
+									<td>{{ appt.appt_id }}</td>
+									<td>{{ appt.date }}</td>
+									<td>{{ appt.time }}</td>
+									
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div><!--end .table-responsive -->
+			</div><!--end .card-body -->
+		</div><!--end .card -->
+	</div><!--end .col -->
+</div><!--end .row -->
+<!-- END RESPONSIVE TABLE 1 -->
 
 {% endblock %}

@@ -162,9 +162,9 @@ View: View Single Patient
 @login_required
 def view_single_patient(user_id):
 
-	data = Users.query.order_by(Users.user_id)
+	data = Users.query.filter(Users.user_id == user_id).first()
 	
-	return render_template('patients-single.html', main_nav = render_nav('main'), data=data, page_title='Patients')
+	return render_template('patients-single.html', main_nav = render_nav('main'), data=data, page_title='Patient: ' + data.first_name + ' ' + data.last_name)
 
 
 

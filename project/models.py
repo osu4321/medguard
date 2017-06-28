@@ -22,6 +22,8 @@ class Users(db.Model):
 	email = db.Column(db.String, unique=True, nullable=False)
 	phone_num = db.Column(db.String(10))
 	user_level = db.relationship('User_level', backref='role')
+	appt = db.relationship('PatientAppt', foreign_keys='PatientAppt.patient_id', backref='appts')
+
 
 	def __init__(self, last_name, first_name, sex, dob, username, password, email, phone_num):
 		
@@ -101,3 +103,5 @@ class PatientAppt(db.Model):
 
 	def __repr__(self):
 		return '<Appt {0}>'.format(self.appt_id)
+
+
