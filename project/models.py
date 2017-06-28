@@ -77,5 +77,27 @@ class Roles(db.Model):
 		return '<Role {0}>'.format(self.name)
 
 '''
-Patient Data
+Patient Appointments
 '''
+class PatientAppt(db.Model):
+
+	__tablename__ = 'patient_appt'
+
+	appt_id = db.Column(db.Integer, primary_key=True)
+	time = db.Column(db.Time, nullable=False)
+	date = db.Column(db.Date, nullable=False)
+	patient_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+	doctor_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+
+
+
+	def __init__(self, date, time, patient_id, doctor_id):
+		
+		self.date = date
+		self.time = time
+		self.patient_id = patient_id
+		self.doctor_id = doctor_id
+		
+
+	def __repr__(self):
+		return '<Appt {0}>'.format(self.appt_id)
