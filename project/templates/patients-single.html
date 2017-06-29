@@ -96,26 +96,25 @@
 								<th>#</th>
 								<th>Date</th>
 								<th>Time</th>
-								<th>Date of Birth</th>
-								<th>Sex</th>
-								<th>Email</th>
-								<th>Phone</th>
-								<th></th>
+								<th>Doctor</th>
 							</tr>
 						</thead>
 
 						<!-- Table data -->
 						<tbody>
 
-							{% for appt in data.appt %}
+							{% for appt in data.appts %}
 								<tr>
+
 									<td>{{ appt.appt_id }}</td>
 									<td>{{ appt.date }}</td>
-									<td>{{ appt.time }}</td>
-									
+									<td>{{ appt.time|timeformat }}</td>
+									<td><a href="{{ url_for('view_single_patient', user_id=appt.doc.user_id ) }}">{{ appt.doc.first_name }} {{ appt.doc.last_name }}</a></td> 
+								
 								</tr>
 							{% endfor %}
-						</tbody>
+
+						</tbody> 
 					</table>
 				</div><!--end .table-responsive -->
 			</div><!--end .card-body -->

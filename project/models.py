@@ -22,7 +22,8 @@ class Users(db.Model):
 	email = db.Column(db.String, unique=True, nullable=False)
 	phone_num = db.Column(db.String(10))
 	user_level = db.relationship('User_level', backref='role')
-	appt = db.relationship('PatientAppt', foreign_keys='PatientAppt.patient_id', backref='appts')
+	appts = db.relationship('PatientAppt', foreign_keys='PatientAppt.patient_id', backref='appts')
+	doc = db.relationship('PatientAppt', foreign_keys='PatientAppt.doctor_id', backref='doc')
 
 
 	def __init__(self, last_name, first_name, sex, dob, username, password, email, phone_num):
@@ -90,8 +91,6 @@ class PatientAppt(db.Model):
 	date = db.Column(db.Date, nullable=False)
 	patient_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 	doctor_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-
-
 
 	def __init__(self, date, time, patient_id, doctor_id):
 		

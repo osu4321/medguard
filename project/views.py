@@ -6,6 +6,7 @@ from forms import AddTaskForm, RegisterForm, LoginForm
 from functools import wraps
 from flask import Flask, flash, redirect, render_template, request, session, url_for, g
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 
 # Config
@@ -34,6 +35,14 @@ def login_required(test):
 			return redirect(url_for('login'))
 
 	return wrap
+
+
+''' Time filter'''
+def timeformat(value, format='%H:%M'):
+	
+    return value.strftime("%I:%M %p")
+
+app.jinja_env.filters['timeformat'] = timeformat
 
 
 ##########
