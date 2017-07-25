@@ -3,7 +3,7 @@
 <!-- BEGIN LOGIN SECTION -->
 <section class="section-account">
 
-	<div class="img-backdrop" style="background-image: url('{{ url_for('static', filename='img/bg/medguard_login.jpg') }}')"></div>
+	<div class="img-backdrop" style="background-image: url('{{ url_for('static', filename='img/bg-medical1.jpg') }}')"></div>
 
 	<div class="spacer"></div>
 
@@ -27,7 +27,7 @@
 					<span class="text-lg text-bold text-primary">MEDGuard</span>
 					<br/><br/>
 
-					<form action="/" method="POST">
+					<form action="/" method="POST" class="form floating-label">
 
 						<div class="form-group">
 						{{ form.username(class_="form-control") }}

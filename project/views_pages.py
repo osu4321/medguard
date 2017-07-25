@@ -12,32 +12,19 @@ PAGE_ACCESS = {
 	1 : [
 		'library',
 		'patients',
-		'appointments'
+		'appointments',
+		'medications',
+		'insurance_providers'
 		
 	],
 
-	2: [],
+	2: [
+		'my_appointments',
+		'my_medications'
+	],
 
 	3: [],
 
 	4: []
 
 }
-
-
-'''
-Define page meta
-'''
-'''
-PAGE_META = {
-
-	'patients' : {
-		
-		'url' : url_for('view_patients'),
-		'title' : 'Patients',
-		'icon' : 'home'
-		
-	}
-
-}
-'''

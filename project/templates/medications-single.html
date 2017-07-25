@@ -1,0 +1,47 @@
+<!--
+	
+	Patients Template
+
+-->
+
+{% extends "dashboard.html" %}
+
+{% block content %}
+
+<!-- ALL PATIENTS -->
+<div class="row">
+
+	<div class="col-lg-12">
+		<h4>Medical Library Information</h4>
+	</div><!--end .col -->
+
+	<div class="col-md-8">
+
+		<article class="margin-bottom-xxl">
+			<p>
+				Below is information for <b>{{ data.name }}</b> currently in the MEDGuard database.
+			</p>
+		</article>
+
+	</div><!--end .col -->
+
+	<div class="col-lg-12">
+
+		<div class="card card-bordered style-primary">
+			<div class="card-head">
+				<header>{{ data.name }}</header>
+			</div><!--end .card-head -->
+			<div class="card-body style-default-bright">
+				<h3>Side Effects</h3>
+				<p>{{ data.side_effects }}</p>
+
+				<h3>Full Description</h3>
+				<p>{{ data.description }}</p>
+			</div><!--end .card-body -->
+		</div>
+
+	</div><!--end .col -->
+
+</div><!--end .row -->
+
+{% endblock %}

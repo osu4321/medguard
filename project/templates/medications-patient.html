@@ -1,0 +1,79 @@
+<!--
+	
+	Appointments Template
+
+-->
+
+{% extends "dashboard.html" %}
+
+{% block content %}
+	
+<div class="row">
+
+	<div class="col-lg-12">
+		<h4>All Medication entries</h4>
+	</div><!--end .col -->
+
+	<div class="col-md-8">
+
+		<article class="margin-bottom-xxl">
+			<p>
+				Below is information for all medications currently in the MEDGuard database.
+			</p>
+		</article>
+
+	</div><!--end .col -->
+
+	<!-- Medications -->
+	<div class="col-lg-12">
+
+		<div class="card card-underline">
+
+			<div class="card-head">
+				<header>Medications & Prescriptions</header>
+			</div>
+
+			<div class="card-body no-padding">
+
+				<div class="table-responsive no-margin">
+
+					<table class="table table-striped no-margin">
+
+						<!-- Table head -->
+						<thead>
+							<tr>
+								<th>Prescription #</th>
+								<th>Medication Name</th>
+								<th>Prescribed Date</th>
+								<th>Quantity</th>
+								<th>Exp. Date</th>
+								<th>Refill Amount</th>
+								<th>Refill Freq</th>
+							</tr>
+						</thead>
+
+						<!-- Table data -->
+						<tbody>
+
+							{% for prescription in data %}
+								<tr>
+									<td>{{ prescription.id }}</td>
+									<td><a href="{{ url_for('view_single_medications', item_id = prescription.med_id ) }}">{{ prescription.med_id }}</a></td>
+									<td>{{ prescription.prescribe_date|dateformat }}</td>
+									<td>{{ prescription.quantity }}</td>
+									<td>{{ prescription.exp_date|dateformat }}</td>
+									<td>{{ prescription.refill_amount }}</td>
+									<td>Every {{ prescription.refill_freq }} Days</td>								
+								</tr>
+							{% endfor %}
+
+						</tbody> 
+					</table>
+				</div><!--end .table-responsive -->
+			</div><!--end .card-body -->
+		</div><!--end .card -->
+	</div><!--end .col -->
+
+</div><!--end .row -->
+
+{% endblock %}

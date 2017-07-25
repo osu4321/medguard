@@ -1,0 +1,18 @@
+<!--
+
+	Main Navigation
+
+-->
+
+
+<!-- Iterate through each received link -->
+{% for link in action_nav %}
+
+	<a class="btn ink-reaction btn-raised btn-primary" href="{{ link['url'] }}">
+		<i class="md md-{{ link['icon'] }}"></i>
+		{{ link['name'] }}
+	</a>
+	
+{% endfor %}
+
+	

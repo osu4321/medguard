@@ -1,18 +1,10 @@
 	
-		<!-- ERROR MESSAGES -->
-		{% for message in get_flashed_messages() %}
-			<div class="flash">{{ message }} </div>
-		{% endfor %}
-
-		{% if error %}
-			<div class="error"><strong>Error:</strong> {{ error }}</div>
-		{% endif %}
-
+		
 		<br>
 
 		<!-- BEGIN JAVASCRIPT -->
 		<script src="{{ url_for('static', filename='js/libs/jquery/jquery-1.11.2.min.js') }}"></script>
-		<script src="{{ url_for('static', filename='js/libs/jquery/jquery-migrate-1.2.1.min') }}"></script>
+		<script src="{{ url_for('static', filename='js/libs/jquery/jquery-migrate-1.2.1.min.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/libs/bootstrap/bootstrap.min.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/libs/spin.js/spin.min.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/libs/autosize/jquery.autosize.min.js') }}"></script>
@@ -25,6 +17,11 @@
 		<script src="{{ url_for('static', filename='js/core/source/AppNavSearch.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/core/source/AppVendor.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/core/demo/Demo.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/libs/DataTables/jquery.dataTables.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/libs/DataTables/extensions/ColVis/js/dataTables.colVis.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/core/demo/DemoTableDynamic.js') }}"></script>
+
 		<!-- END JAVASCRIPT -->
 
 	</body>

@@ -11,14 +11,14 @@
 <div class="row">
 
 	<div class="col-lg-12">
-		<h4>All Appointments</h4>
+		<h4>All Medication entries</h4>
 	</div><!--end .col -->
 
 	<div class="col-md-8">
 
 		<article class="margin-bottom-xxl">
 			<p>
-				Below is information for all appointments currently in the MACGguard database.
+				Below is information for all medications currently in the MEDGuard database.
 			</p>
 		</article>
 
@@ -38,25 +38,24 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Patient Name</th>
-								<th>Date</th>
-								<th>Time</th>
-								<th>Doctor</th>
+								<th>Name</th>
+								<th>Description</th>
+								<th>Side Effects</th>
+								
 							</tr>
 						</thead>
 
 						<!-- Table data -->
 						<tbody>
 
-							{% for appt in data %}
+							{% for item in data %}
 
 								<tr>
 
-									<td>{{ appt.appt_id }}</td>
-									<td><a href="{{ url_for('view_single_patient', user_id=appt.patient_id ) }}">{{ appt.appts.first_name }} {{ appt.appts.last_name }}</a></td>
-									<td>{{ appt.date|dateformat }}</td>
-									<td>{{ appt.time|timeformat }}</td>
-									<td>{{ appt.doc.first_name }} {{ appt.doc.last_name }}</td>
+									<td>{{ item.id }}</td>
+									<td><a href="{{ url_for('view_single_medications', item_id=item.id ) }}">{{ item.name }}</a></td>
+									<td>{{ item.description }}</td>
+									<td>{{ item.side_effects }}</td>
 
 								</tr>
 

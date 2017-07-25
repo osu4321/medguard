@@ -19,6 +19,18 @@ class AddTaskForm(Form):
 
 
 '''
+Add a Library item
+'''
+class AddLibraryItemForm(Form):
+
+	name = StringField('Library Entry Name', validators=[DataRequired()])
+	symptom = StringField('Symptom', validators=[DataRequired()])
+	excerpt = StringField('Excerpt', validators=[DataRequired()])
+	desc = StringField('Description', validators=[DataRequired()])
+
+
+
+'''
 User Registration
 '''
 class RegisterForm(Form):
